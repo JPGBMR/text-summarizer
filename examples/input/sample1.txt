@@ -1,0 +1,1 @@
+Python is a high-level programming language. It is widely used in web development. Data science and machine learning are popular applications. Python has a simple and readable syntax. Many companies use Python for automation. The Python community is large and supportive.
