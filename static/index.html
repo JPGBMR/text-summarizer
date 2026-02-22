@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle">
+        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle dark mode">
+            <svg id="theme-icon" class="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Moon icon (shown in light mode) -->
+                <path class="moon-icon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                <!-- Sun icon (shown in dark mode) -->
+                <g class="sun-icon hidden">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </g>
+            </svg>
+        </button>
+    </div>
+
     <div class="container">
         <header>
             <h1>📝 Text Summarizer</h1>
@@ -17,6 +39,18 @@
             <form id="summarize-form">
                 <div class="form-group">
                     <label for="input-text">Input Text</label>
+                    <div class="file-upload-zone" id="file-upload-zone">
+                        <input type="file" id="file-input" accept=".txt" hidden>
+                        <div class="upload-prompt">
+                            <span class="upload-icon">📄</span>
+                            <p>Drag & drop a .txt file here or <button type="button" id="browse-btn" class="link-btn">browse</button></p>
+                            <p class="upload-hint">Maximum file size: 5MB</p>
+                        </div>
+                        <div id="file-loaded" class="file-loaded hidden">
+                            <span id="filename"></span>
+                            <button type="button" id="clear-file-btn" class="clear-file-btn">×</button>
+                        </div>
+                    </div>
                     <textarea
                         id="input-text"
                         name="text"
@@ -68,7 +102,53 @@ Example: Artificial intelligence is revolutionizing various industries across th
             </div>
 
             <div id="results" class="results hidden">
-                <h2>Results</h2>
+                <div class="results-header">
+                    <h2>Results</h2>
+                    <div class="results-actions">
+                        <button id="copy-btn" class="btn-secondary" aria-label="Copy summary to clipboard">
+                            <span id="copy-icon">📋</span>
+                            <span id="copy-text">Copy to Clipboard</span>
+                        </button>
+                        <div class="export-dropdown">
+                            <button id="export-btn" class="btn-secondary">
+                                Export ▾
+                            </button>
+                            <div id="export-menu" class="dropdown-menu hidden">
+                                <button data-format="txt">Download as TXT</button>
+                                <button data-format="pdf">Download as PDF</button>
+                                <button data-format="docx">Download as DOCX</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Card -->
+                <div id="statistics-card" class="statistics-card hidden">
+                    <h3>Summary Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Original</span>
+                            <span class="stat-value" id="stat-original-words">-</span>
+                            <span class="stat-unit">words</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Summary</span>
+                            <span class="stat-value" id="stat-summary-words">-</span>
+                            <span class="stat-unit">words</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Compression</span>
+                            <span class="stat-value" id="stat-compression">-</span>
+                            <span class="stat-unit">%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Time Saved</span>
+                            <span class="stat-value" id="stat-time-saved">-</span>
+                            <span class="stat-unit"></span>
+                        </div>
+                    </div>
+                </div>
+
                 <div id="results-container"></div>
             </div>
 
@@ -80,6 +160,33 @@ Example: Artificial intelligence is revolutionizing various industries across th
         </footer>
     </div>
 
+    <!-- History Panel -->
+    <div id="history-panel" class="history-panel">
+        <button id="history-toggle-btn" class="history-toggle-btn" aria-label="Toggle history panel">
+            📜 History
+        </button>
+        <div id="history-sidebar" class="history-sidebar hidden">
+            <div class="history-header">
+                <h3>Recent Summaries</h3>
+                <button id="close-history-btn" class="close-btn" aria-label="Close history">×</button>
+            </div>
+            <div id="history-list" class="history-list">
+                <!-- History entries populated by JS -->
+            </div>
+            <div class="history-footer">
+                <button id="clear-history-btn" class="btn-text-danger">Clear All History</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docx@7.8.2/build/index.min.js"></script>
+
+    <!-- Application Scripts -->
+    <script src="/storage.js"></script>
+    <script src="/utils.js"></script>
+    <script src="/export.js"></script>
     <script src="/app.js"></script>
 </body>
 </html>
