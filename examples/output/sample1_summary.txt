@@ -1,0 +1,7 @@
+# Summary of sample1.txt
+# Algorithm: LSA
+# Sentence count: 2
+# Original word count: 41
+# Summary word count: 14
+
+Python is a high-level programming language. Data science and machine learning are popular applications.

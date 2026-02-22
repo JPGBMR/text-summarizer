@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarizer</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 Text Summarizer</h1>
+            <p class="subtitle">Automatic text summarization using TextRank & LSA algorithms</p>
+        </header>
+
+        <main>
+            <form id="summarize-form">
+                <div class="form-group">
+                    <label for="input-text">Input Text</label>
+                    <textarea
+                        id="input-text"
+                        name="text"
+                        rows="10"
+                        placeholder="Paste your text here to generate a summary...
+
+Example: Artificial intelligence is revolutionizing various industries across the globe. From healthcare to finance, AI technologies are being deployed to improve efficiency and decision-making. Machine learning algorithms can analyze vast amounts of data to identify patterns and make predictions. Natural language processing enables computers to understand and generate human language. Computer vision allows machines to interpret and analyze visual information. These technologies are transforming how businesses operate and how people interact with technology in their daily lives."
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Algorithm</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="algorithm" value="textrank"> TextRank
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="algorithm" value="lsa"> LSA
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="algorithm" value="both" checked> Both (Compare)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="length">Summary Length: <span id="length-value">3</span> sentences</label>
+                        <input
+                            type="range"
+                            id="length"
+                            name="length"
+                            min="1"
+                            max="10"
+                            value="3"
+                        >
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" id="submit-btn">
+                    Generate Summary
+                </button>
+            </form>
+
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Generating summary...</p>
+            </div>
+
+            <div id="results" class="results hidden">
+                <h2>Results</h2>
+                <div id="results-container"></div>
+            </div>
+
+            <div id="error" class="error hidden"></div>
+        </main>
+
+        <footer>
+            <p>Part of the <a href="https://github.com/JPGBMR" target="_blank">JPGBMR</a> open-source portfolio</p>
+        </footer>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>

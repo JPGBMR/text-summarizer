@@ -1,0 +1,7 @@
+# Summary of sample2.txt
+# Algorithm: LSA
+# Sentence count: 2
+# Original word count: 42
+# Summary word count: 16
+
+Amazon Web Services is a leading cloud provider. Cloud security is a critical concern for organizations.
